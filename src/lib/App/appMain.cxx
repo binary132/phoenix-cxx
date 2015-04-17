@@ -1,3 +1,6 @@
+#include <memory>
+#include <time.h>
+
 #include "SDL.h"
 
 #include "app.hpp"
@@ -6,16 +9,29 @@ using namespace app;
 
 void App::run()
 {
+     srand(time(NULL));
+
+     const int numPoints = 1000;
      bool finished = false;
      bool lmbDown = false;
 
-     int prevX = 0, prevY = 0;
-     int currX = 0, currY = 0;
+     int xMid = w() / 2.0;
+     int yMid = h() / 2.0;
+
+     int mouseX = xMid, mouseY = yMid;
 
      SDL_Event event = SDL_Event{ 0 };
 
+     std::allocator<Part> ps;
+     Part* parts = ps.allocate(numPoints);
+
+     for( int i = 0; i < numPoints; i++ ) {
+          parts[i] = Part(xMid + rand()%(int)(w()/4.0), yMid + rand()%(int)(h()/4.0), w(), h());
+     }
+
      while (!finished) {
           graphics.update();
+          mouseX = xMid, mouseY = yMid;
 
           while (SDL_PollEvent(&event)) {
                switch(event.type) {
@@ -35,21 +51,31 @@ void App::run()
                case SDL_MOUSEBUTTONDOWN:
                     if (event.button.button == SDL_BUTTON_LEFT) {
                          lmbDown = true;
-                         prevX = currX = event.button.x, prevY = currY = event.button.y;
-                         graphics.drawPoint(currX, currY);
+                         mouseX = event.motion.x;
+                         mouseY = event.motion.y;
                     }
                     break;
                case SDL_MOUSEMOTION:
                     if (lmbDown)
                     {
-                         currX = event.motion.x, currY = event.motion.y;
-                         graphics.drawLine(prevX, prevY, currX, currY);
+                         mouseX = event.motion.x;
+                         mouseY = event.motion.y;
                     }
-                    prevX = currX, prevY = currY;
-                    break;
                }
+               break;
+          }
+
+          for( int i = 0; i < numPoints; i++ ) {
+               if(lmbDown) {
+                    parts[i].grav(mouseX, mouseY);
+               }
+               parts[i].update();
+               graphics.drawPoint(parts[i].x, parts[i].y);
           }
 
           graphics.draw();
+          //graphics.clear();
      }
+
+     ps.deallocate(parts, numPoints);
 }

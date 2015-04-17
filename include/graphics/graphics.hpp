@@ -19,6 +19,7 @@ namespace gfx
 
           void update();
           void draw();
+          void clear();
 
           inline void drawPoint(int x, int y) { pixels[y * w + x] = 0; }
 

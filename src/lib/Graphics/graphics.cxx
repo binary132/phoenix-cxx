@@ -32,6 +32,11 @@ void Graphics::draw()
      SDL_RenderPresent(renderer.handle());
 }
 
+void Graphics::clear()
+{
+     memset(pixels, 255, w * h * sizeof(Uint32));
+}
+
 void Graphics::drawLine(int x1, int y1,
                         int x2, int y2)
 {
