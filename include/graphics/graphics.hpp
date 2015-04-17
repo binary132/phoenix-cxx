@@ -21,7 +21,15 @@ namespace gfx
           void draw();
           void clear();
 
-          inline void drawPoint(int x, int y) { pixels[y * w + x] = 0; }
+          inline void drawPoint(int x, int y, int color)
+          {
+               if(x > 0 && x < w-1 &&
+                  y > 0 && y < h-1) {
+                    pixels[y * w + x] = color;
+               }
+          }
+
+          void drawBlob(int x, int y, int r, int color);
 
           void drawLine(int x1, int y1,
                         int x2, int y2);

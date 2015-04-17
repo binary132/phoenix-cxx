@@ -17,7 +17,7 @@ Graphics::Graphics(sdl::Window& winIn,
              w, h)
 {
      pixels = new Uint32[w * h];
-     memset(pixels, 255, w * h * sizeof(Uint32));
+     memset(pixels, 0, w * h * sizeof(Uint32));
 }
 
 void Graphics::update()
@@ -34,7 +34,7 @@ void Graphics::draw()
 
 void Graphics::clear()
 {
-     memset(pixels, 255, w * h * sizeof(Uint32));
+     memset(pixels, 0, w * h * sizeof(Uint32));
 }
 
 void Graphics::drawLine(int x1, int y1,
@@ -46,7 +46,22 @@ void Graphics::drawLine(int x1, int y1,
      float stepX = dx / d, stepY = dy / d;
 
      for( int i = 0; i * i < d2; i++ ) {
-          drawPoint(x1 + (int)((i * stepX)), y1 + (int)(i * stepY));
+          drawPoint(x1 + (int)((i * stepX)), y1 + (int)(i * stepY), 255);
+     }
+}
+
+void Graphics::drawBlob(int x, int y, int r, int color)
+{
+     int dx = 0, dy = 0, d2 = (r * r);
+
+     for( int i = x - r; i < x + r; i++ ) {
+          for( int j = y - r; j < y + r; j++ ) {
+               dx = x - i;
+               dy = y - j;
+               if( dx*dx + dy*dy < d2 ) {
+                    drawPoint(i, j, color);
+               }
+          }
      }
 }
 

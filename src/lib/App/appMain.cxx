@@ -11,7 +11,7 @@ void App::run()
 {
      srand(time(NULL));
 
-     const int numPoints = 1000;
+     const int numPoints = 30000;
      bool finished = false;
      bool lmbDown = false;
 
@@ -26,13 +26,11 @@ void App::run()
      Part* parts = ps.allocate(numPoints);
 
      for( int i = 0; i < numPoints; i++ ) {
-          parts[i] = Part(xMid + rand()%(int)(w()/4.0), yMid + rand()%(int)(h()/4.0), w(), h());
+          parts[i] = Part(xMid - (int)(w()/4.0) + rand()%(int)(w()/4.0),
+                          yMid - (int)(h()/4.0) + rand()%(int)(h()/4.0));
      }
 
      while (!finished) {
-          graphics.update();
-          mouseX = xMid, mouseY = yMid;
-
           while (SDL_PollEvent(&event)) {
                switch(event.type) {
                case SDL_QUIT:
@@ -51,8 +49,8 @@ void App::run()
                case SDL_MOUSEBUTTONDOWN:
                     if (event.button.button == SDL_BUTTON_LEFT) {
                          lmbDown = true;
-                         mouseX = event.motion.x;
-                         mouseY = event.motion.y;
+                         mouseX = event.button.x;
+                         mouseY = event.button.y;
                     }
                     break;
                case SDL_MOUSEMOTION:
@@ -61,8 +59,8 @@ void App::run()
                          mouseX = event.motion.x;
                          mouseY = event.motion.y;
                     }
+                    break;
                }
-               break;
           }
 
           for( int i = 0; i < numPoints; i++ ) {
@@ -70,11 +68,12 @@ void App::run()
                     parts[i].grav(mouseX, mouseY);
                }
                parts[i].update();
-               graphics.drawPoint(parts[i].x, parts[i].y);
+               graphics.drawBlob(parts[i].x, parts[i].y, parts[i].r, parts[i].color);
           }
 
+          graphics.update();
           graphics.draw();
-          //graphics.clear();
+          graphics.clear();
      }
 
      ps.deallocate(parts, numPoints);

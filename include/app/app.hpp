@@ -1,13 +1,15 @@
 #ifndef APP_H
 #define APP_H
 
+#include <cmath>
+
 #include "initError.hpp"
 #include "world.hpp"
 #include "graphics.hpp"
 #include "sdlUtil.hpp"
 
-#define DV 0.01
-#define FRIC 0.005
+#define DV 1000.0
+#define FRIC 0.15
 
 namespace app {
      class App {
@@ -29,30 +31,35 @@ namespace app {
 
           class Part {
           public:
-               Part(int xi, int yi,
-                    int xM, int yM) : 
+               Part(int xi, int yi) :
                     x(xi), y(yi),
-                    dx(0.0), dy(0.0),
-                    xMax(xM), yMax(yM) { }
+                    color(0), r(0),
+                    vx(0.0), vy(0.0) { }
 
                void grav(int mX, int mY)
                {
-                    dx = dx + (DV * (mX - x)) - FRIC * (dx);
-                    dy = dy + (DV * (mY - y)) - FRIC * (dy);
+                    int dx = mX - x;
+                    int dy = mY - y;
+                    float dst = sqrt(dx*dx + dy*dy);
+                    float a = DV / (dst*dst) + 1.0/200000.0 * dst;
+                    vx += a*dx - FRIC * vx;
+                    vy += a*dy - FRIC * vy;
                }
 
                void update()
                {
-                    x = x + dx, y = y + dy;
-                    if( x > xMax - 1 ) { x = xMax - 1; }
-                    if( x < 0 ) { x = 0; }
-                    if( y > yMax - 1 ) { y = yMax - 1; }
-                    if( y < 0 ) { y = 0; }
+                    x = x + vx, y = y + vy;
+                    color = -255 + (int)(10*sqrt((vx*vx) + (vy*vy)));
+                    r = 1 + 3.0*(1.0/20.0*sqrt((vx*vx) + (vy*vy)));
+
+                    // (int)(1.0/100.0*sqrt((vx*vx) + (vy*vy)));
+                    // r = 10.0/color;
                }
 
                int x, y;
-               int xMax, yMax;
-               float dx, dy;
+               int color;
+               int r;
+               float vx, vy;
           };
      };
 }
