@@ -22,3 +22,5 @@ Debug/
 obj/
 *.psess
 *.vspx
+
+.DS_Store
