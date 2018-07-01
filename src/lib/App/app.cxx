@@ -10,7 +10,7 @@
 
 using namespace app;
 
-App::App(const std::string& titleIn) throw (error::InitError) :
+App::App(const std::string& titleIn) noexcept(false) :
      title(titleIn),
      sdlUtil(title,
              SDL_WINDOW_FULLSCREEN | SDL_WINDOW_ALLOW_HIGHDPI |

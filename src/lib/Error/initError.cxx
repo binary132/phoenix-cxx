@@ -1,4 +1,5 @@
 #include <string>
+#include <sstream>
 
 #include "initError.hpp"
 #include "SDL.h"
@@ -6,14 +7,21 @@
 using namespace error;
 
 InitError::InitError():
-     exception(), msg(SDL_GetError()) {}
+     exception()
+{
+     msg.append(unknown);
+     msg.append(SDL_GetError());
+}
 
-InitError::InitError(const std::string& m):
-     exception(), msg(m) {}
+InitError::InitError(std::string&& s):
+     exception(),
+     msg(std::forward<std::string>(s)) {}
 
-InitError::~InitError() throw() {}
+InitError::InitError(std::stringstream& ss):
+     exception(),
+     msg(std::move(ss.str())) {}
 
-const char* InitError::what() const throw()
+const char* InitError::what() const noexcept
 {
      return msg.c_str();
 }

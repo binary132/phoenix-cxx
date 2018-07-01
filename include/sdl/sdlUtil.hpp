@@ -1,7 +1,6 @@
 #ifndef SDLUTIL_H
 #define SDLUTIL_H
 
-#include "initError.hpp"
 #include "initUtil.hpp"
 #include "initVideo.hpp"
 #include "display.hpp"
@@ -13,7 +12,7 @@ namespace sdl
      {
      public:
           SDLUtil(const std::string& titleIn = "Phoenix App",
-                  Uint32 windowFlags = 0) throw (error::InitError);
+                  Uint32 windowFlags = 0) noexcept(false);
 
           int w() { return display.w(); }
           int h() { return display.h(); }

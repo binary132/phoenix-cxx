@@ -68,7 +68,12 @@ void App::run()
                     parts[i].grav(mouseX, mouseY);
                }
                parts[i].update();
-               graphics.drawBlob(parts[i].x, parts[i].y, parts[i].r, parts[i].color);
+               graphics.drawBlob(
+		    std::move(parts[i].x),
+		    std::move(parts[i].y),
+		    std::move(parts[i].r),
+		    std::move(parts[i].color)
+	       );
           }
 
           graphics.update();

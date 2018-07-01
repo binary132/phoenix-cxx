@@ -3,7 +3,6 @@
 
 #include "SDL.h"
 
-#include "initError.hpp"
 #include "renderer.hpp"
 
 namespace sdl
@@ -15,7 +14,7 @@ namespace sdl
                  int x = SDL_WINDOWPOS_CENTERED,
                  int y = SDL_WINDOWPOS_CENTERED,
                  int w = 640, int h = 480,
-                 Uint32 flags = 0) throw (error::InitError);
+                 Uint32 flags = 0) noexcept(false);
 
           SDL_Window* handle();
 

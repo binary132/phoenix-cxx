@@ -3,14 +3,12 @@
 
 #include "SDL.h"
 
-#include "initError.hpp"
-
 namespace sdl
 {
      class Renderer
      {
      public:
-          Renderer(SDL_Window*, Uint32 flags = 0) throw (error::InitError);
+          Renderer(SDL_Window*, Uint32 flags = 0) noexcept(false);
 
           SDL_Renderer* handle();
 

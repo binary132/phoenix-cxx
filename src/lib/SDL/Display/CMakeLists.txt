@@ -19,5 +19,5 @@ target_link_libraries(SDLDisplay
   Error
 )
 
-set_property(TARGET SDLDisplay PROPERTY CXX_STANDARD 11)
+set_property(TARGET SDLDisplay PROPERTY CXX_STANDARD 17)
 set_property(TARGET SDLDisplay PROPERTY CXX_STANDARD_REQUIRED ON)

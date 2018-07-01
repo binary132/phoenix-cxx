@@ -7,17 +7,13 @@
 
 using namespace sdl;
 
-InitUtil::InitUtil(Uint32 flags) throw (error::InitError)
+InitUtil::InitUtil(Uint32 flags) noexcept(false)
 {
-     std::stringstream ss;
-
-     int initOk = SDL_Init(flags);
-
-     if (initOk != 0) {
+     if (int initOk = SDL_Init(flags) != 0) {
+          std::stringstream ss;
           ss << "SDL_Init failed with code " << initOk
              << ": " << SDL_GetError();
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 }
 

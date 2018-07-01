@@ -6,7 +6,7 @@ namespace sdl
      class InitVideo
      {
      public:
-          InitVideo();
+          InitVideo() noexcept(false);
      };
 }
 

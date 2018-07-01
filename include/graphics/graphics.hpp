@@ -15,7 +15,7 @@ namespace gfx
                    int w, int h,
                    Uint32 flags =
                      SDL_RENDERER_ACCELERATED |
-                     SDL_RENDERER_PRESENTVSYNC) throw (error::InitError);
+		   SDL_RENDERER_PRESENTVSYNC) noexcept(false);
 
           void update();
           void draw();
@@ -29,7 +29,7 @@ namespace gfx
                }
           }
 
-          void drawBlob(int x, int y, int r, int color);
+          void drawBlob(int&& x, int&& y, int&& r, int&& color);
 
           void drawLine(int x1, int y1,
                         int x2, int y2);

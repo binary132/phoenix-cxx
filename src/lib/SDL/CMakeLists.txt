@@ -31,5 +31,5 @@ target_link_libraries(SDLUtil
   Graphics
 )
 
-set_property(TARGET SDLUtil PROPERTY CXX_STANDARD 11)
+set_property(TARGET SDLUtil PROPERTY CXX_STANDARD 17)
 set_property(TARGET SDLUtil PROPERTY CXX_STANDARD_REQUIRED ON)

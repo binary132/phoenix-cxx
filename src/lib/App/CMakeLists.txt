@@ -26,5 +26,5 @@ target_link_libraries(App
   Graphics
 )
 
-set_property(TARGET App PROPERTY CXX_STANDARD 11)
+set_property(TARGET App PROPERTY CXX_STANDARD 17)
 set_property(TARGET App PROPERTY CXX_STANDARD_REQUIRED ON)

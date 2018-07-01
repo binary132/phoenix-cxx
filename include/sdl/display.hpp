@@ -3,14 +3,12 @@
 
 #include "SDL.h"
 
-#include "initError.hpp"
-
 namespace sdl
 {
      class Display
      {
      public:
-          Display() throw(error::InitError);
+          Display() noexcept(false);
 
           int w() { return display.w; };
           int h() { return display.h; };

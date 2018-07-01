@@ -7,7 +7,7 @@
 
 using namespace sdl;
 
-Display::Display() throw (error::InitError)
+Display::Display() noexcept(false)
 {
      std::stringstream ss;
 
@@ -15,7 +15,6 @@ Display::Display() throw (error::InitError)
      if (initOk != 0) {
           ss << "SDL_GetCurrentDisplayMode failed with code " << initOk
              << ": " << SDL_GetError();
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 }

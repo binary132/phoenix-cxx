@@ -10,7 +10,7 @@ using namespace gfx;
 
 Graphics::Graphics(sdl::Window& winIn,
                    int wIn, int hIn,
-                   Uint32 flags) throw (error::InitError) :
+                   Uint32 flags) noexcept(false) :
      w(wIn), h(hIn),
      renderer(winIn.handle(), flags),
      texture(renderer.handle(),
@@ -50,7 +50,7 @@ void Graphics::drawLine(int x1, int y1,
      }
 }
 
-void Graphics::drawBlob(int x, int y, int r, int color)
+void Graphics::drawBlob(int&& x, int&& y, int&& r, int&& color)
 {
      int dx = 0, dy = 0, d2 = (r * r);
 

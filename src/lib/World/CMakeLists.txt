@@ -11,5 +11,5 @@ target_include_directories(World PUBLIC
   ${SDL2_INCLUDE_DIR}
 )
 
-set_property(TARGET World PROPERTY CXX_STANDARD 11)
+set_property(TARGET World PROPERTY CXX_STANDARD 17)
 set_property(TARGET World PROPERTY CXX_STANDARD_REQUIRED ON)

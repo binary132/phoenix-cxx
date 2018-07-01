@@ -1,4 +1,5 @@
 #include <sstream>
+#include <string_view>
 
 #include "SDL.h"
 
@@ -10,7 +11,7 @@ using namespace sdl;
 Window::Window(const char* title,
                int x, int y,
                int w, int h,
-               Uint32 flags) throw (error::InitError)
+               Uint32 flags) noexcept(false)
 {
      std::stringstream ss;
 
@@ -18,19 +19,16 @@ Window::Window(const char* title,
           if (int v = SDL_VideoInit(NULL) != 0) {
                ss << "SDL_VideoInit failed with code " << v
                   << ": " << SDL_GetError();
-
-               throw error::InitError(ss.str());
+               throw error::InitError(ss);
           }
      } else {
           ss << "0 drivers found";
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 
      if(int numDisp = SDL_GetNumVideoDisplays() < 1) {
           ss << "SDL_GetNumVideoDisplays returned " << numDisp;
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 
      window = SDL_CreateWindow(title,
@@ -40,8 +38,7 @@ Window::Window(const char* title,
 
      if (window == NULL) {
           ss << "SDL_CreateWindow failed: " << SDL_GetError();
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 }
 

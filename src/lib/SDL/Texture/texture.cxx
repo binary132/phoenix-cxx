@@ -8,26 +8,29 @@
 using namespace sdl;
 
 Texture::Texture(SDL_Renderer* renderer,
-                 int w, int h) throw (error::InitError)
+                 int w, int h) noexcept(false)
 {
-     std::stringstream ss;
-
      texture = SDL_CreateTexture(renderer,
                                  SDL_PIXELFORMAT_ARGB8888,
                                  SDL_TEXTUREACCESS_STREAMING,
                                  w, h);
      if (texture == NULL) {
+          std::stringstream ss;
           ss << "SDL_CreateTexture failed: " << SDL_GetError();
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 }
 
 void Texture::update(const SDL_Rect* rect,
                      const void*     pixels,
-                     int             pitch)
+                     int             pitch) noexcept(false)
 {
-     SDL_UpdateTexture(texture, rect, pixels, pitch);
+     if (int v = SDL_UpdateTexture(texture, rect, pixels, pitch) != 0) {
+	  std::stringstream ss;
+	  ss << "SD_UpdateTexture failed with " << v
+	     << ": " << SDL_GetError();
+	  throw error::InitError(ss);
+     }
 }
 
 Texture::~Texture()

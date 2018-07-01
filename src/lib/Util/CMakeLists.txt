@@ -15,5 +15,5 @@ target_link_libraries(Util
   Error
 )
 
-set_property(TARGET Util PROPERTY CXX_STANDARD 11)
+set_property(TARGET Util PROPERTY CXX_STANDARD 17)
 set_property(TARGET Util PROPERTY CXX_STANDARD_REQUIRED ON)

@@ -3,16 +3,20 @@
 
 #include <exception>
 #include <string>
+#include <string_view>
 
 namespace error {
      class InitError: public std::exception {
      private:
-          std::string msg;
+	  static constexpr std::string_view unknown = "unknown error: ";
+	  std::string msg;
      public:
           InitError ();
-          InitError (const std::string&);
-          virtual ~InitError () throw();
-          virtual const char* what() const throw();
+
+	  InitError (std::string&&);
+	  InitError (std::stringstream&);
+
+          virtual const char* what() const noexcept;
      };
 }
 

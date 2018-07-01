@@ -14,7 +14,7 @@
 namespace app {
      class App {
      public:
-          App(const std::string& title = "Phoenix") throw (error::InitError);
+          App(const std::string& title = "Phoenix") noexcept(false);
 
           void run();
 

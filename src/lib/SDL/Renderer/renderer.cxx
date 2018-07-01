@@ -7,15 +7,13 @@
 
 using namespace sdl;
 
-Renderer::Renderer(SDL_Window* win, Uint32 flags) throw (error::InitError)
+Renderer::Renderer(SDL_Window* win, Uint32 flags) noexcept(false)
 {
-     std::stringstream ss;
-
      renderer = SDL_CreateRenderer(win, -1, flags);
      if (renderer == NULL) {
+          std::stringstream ss;
           ss << "SDL_CreateRenderer failed: " << SDL_GetError();
-
-          throw error::InitError(ss.str());
+          throw error::InitError(ss);
      }
 }
 

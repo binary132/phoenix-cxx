@@ -3,18 +3,16 @@
 
 #include "SDL.h"
 
-#include "initError.hpp"
-
 namespace sdl
 {
      class Texture
      {
      public:
           Texture(SDL_Renderer* renderer,
-                  int w = 640, int h = 480) throw (error::InitError);
+                  int w = 640, int h = 480) noexcept(false);
           ~Texture();
 
-          void update(const SDL_Rect*, const void*, int);
+          void update(const SDL_Rect*, const void*, int) noexcept(false);
 
           SDL_Texture* handle() { return texture; }
 
