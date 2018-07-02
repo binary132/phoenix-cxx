@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include <glad/glad.h>
+
 #include "SDL.h"
 
 #include "initError.hpp"

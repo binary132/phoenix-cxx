@@ -1,6 +1,7 @@
 project(Phoenix CXX C)
 
 cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Set application to GUI type for Win32 and MacOS
 if(WIN32)
@@ -11,25 +12,17 @@ if(APPLE)
 endif(APPLE)
 
 # global variables
-set(Phoenix_INCLUDE_DIR
-  ${CMAKE_SOURCE_DIR}/include
-)
-
-set(Phoenix_TARGET_DIR
-  ${CMAKE_BINARY_DIR}/target
-)
-
-set(Phoenix_LIB_DIR
-  ${CMAKE_BINARY_DIR}/lib
-)
+set(Phoenix_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+set(Phoenix_TARGET_DIR ${CMAKE_BINARY_DIR}/target)
+set(Phoenix_LIB_DIR ${CMAKE_BINARY_DIR}/lib)
 
 set(APPLICATION_NAME ${PROJECT_NAME})
 
-set(APPLICATION_VERSION_MAJOR "0")
-set(APPLICATION_VERSION_MINOR "0")
-set(APPLICATION_VERSION_PATCH "1")
+set(APP_V_MAJOR "0")
+set(APP_V_MINOR "0")
+set(APP_V_PATCH "1")
 
-set(APPLICATION_VERSION	"${APPLICATION_VERSION_MAJOR}.${APPLICATION_VERSION_MINOR}.${APPLICATION_VERSION_PATCH}")
+set(APP_V "${APP_V_MAJOR}.${APP_V_MINOR}.${APP_V_PATCH}")
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ isinc
 # checked
@@ -44,4 +37,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${Phoenix_TARGET_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${Phoenix_LIB_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${Phoenix_LIB_DIR})
 
+add_subdirectory(dep)
 add_subdirectory(src)

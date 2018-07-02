@@ -10,6 +10,7 @@ add_library(App STATIC ${App_SRCS})
 find_package(SDL2 REQUIRED)
 
 target_include_directories(App PUBLIC
+  ${GLAD_INCLUDE_DIR}
   ${SDL2_INCLUDE_DIR}
   ${Phoenix_INCLUDE_DIR}/error
   ${Phoenix_INCLUDE_DIR}/world
@@ -20,6 +21,7 @@ target_include_directories(App PUBLIC
 
 target_link_libraries(App
   ${SDL2_LIBRARY}
+  GLAD
   Error
   SDLUtil
   World
