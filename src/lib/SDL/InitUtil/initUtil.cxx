@@ -25,9 +25,30 @@ InitUtil::InitUtil(Uint32 flags) noexcept(false)
      }
 
      // Request an OpenGL 4.1 context (should be core)
-     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+     if (int visOk = SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1) != 0) {
+	   std::stringstream ss;
+	   ss << "SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1) "
+              << "failed with code " << visOk
+	      << ": " << SDL_GetError();
+	   throw error::InitError(ss);
+     }
+
+     if (int ctxMajOk = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4) != 0) {
+	   std::stringstream ss;
+	   ss << "SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4) "
+              << "failed with code " << ctxMajOk
+	      << ": " << SDL_GetError();
+	   throw error::InitError(ss);
+     }
+
+     if (int minOk = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1) != 0) {
+	   std::stringstream ss;
+	   ss << "SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1) "
+              << "failed with code " << minOk
+	      << ": " << SDL_GetError();
+	   throw error::InitError(ss);
+     }
+
      // // Also request a depth buffer
      // SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
      // SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
