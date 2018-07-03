@@ -1,6 +1,8 @@
 #ifndef SDLUTIL_H
 #define SDLUTIL_H
 
+#include <string>
+
 #include "initUtil.hpp"
 #include "initVideo.hpp"
 #include "display.hpp"
