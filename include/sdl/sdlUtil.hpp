@@ -12,7 +12,9 @@ namespace sdl
      {
      public:
           SDLUtil(const std::string& titleIn = "Phoenix App",
-                  Uint32 windowFlags = 0) noexcept(false);
+                  Uint32 windowFlags = 0,
+	          Uint32 SDLSubsystems = SDL_INIT_VIDEO | SDL_INIT_AUDIO
+	  ) noexcept(false);
 
           int w() { return display.w(); }
           int h() { return display.h(); }
