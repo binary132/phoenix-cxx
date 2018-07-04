@@ -8,6 +8,7 @@ lib/
 target/
 
 *.sw[nop]
+*~
 
 *.so
 *.a
