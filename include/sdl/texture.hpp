@@ -12,7 +12,7 @@ namespace sdl
                   int w = 640, int h = 480) noexcept(false);
           ~Texture();
 
-          void update(const SDL_Rect*, const void*, int) noexcept(false);
+          void update(const SDL_Rect*, const Uint32*, int) noexcept(false);
 
           SDL_Texture* handle() { return texture; }
 

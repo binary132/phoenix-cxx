@@ -7,11 +7,15 @@
 #include "world.hpp"
 #include "graphics.hpp"
 #include "sdlUtil.hpp"
+#include "glRenderer.hpp"
+#include "renderer.hpp"
 
 #define DV 1000.0
 #define FRIC 0.15
 
 namespace app {
+
+     template<class T>
      class App {
      public:
           App(const std::string& title = "Phoenix") noexcept(false);
@@ -27,7 +31,7 @@ namespace app {
           sdl::SDLUtil sdlUtil;
 
           world::World world;
-          gfx::Graphics graphics;
+          gfx::Graphics<T> graphics;
 
           class Part {
           public:
@@ -63,5 +67,8 @@ namespace app {
           };
      };
 }
+
+#include "app.hxx"
+#include "appMain.hxx"
 
 #endif

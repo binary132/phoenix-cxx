@@ -19,6 +19,7 @@ target_link_libraries(SDLRenderer
   GLAD
   ${SDL2_LIBRARY}
   Error
+  SDLTexture
 )
 
 set_property(TARGET SDLRenderer PROPERTY CXX_STANDARD 17)

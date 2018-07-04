@@ -24,6 +24,7 @@ target_link_libraries(App
   GLAD
   Error
   SDLUtil
+  SDLGLRenderer
   World
   Graphics
 )

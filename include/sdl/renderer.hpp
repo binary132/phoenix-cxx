@@ -3,21 +3,28 @@
 
 #include "SDL.h"
 
+#include "texture.hpp"
+
 namespace sdl
 {
      class Renderer
      {
      public:
-          Renderer(SDL_Window*, Uint32 flags = 0) noexcept(false);
+          Renderer(SDL_Window*, int w, int h) noexcept(false);
 
-          SDL_Renderer* handle();
-	  SDL_GLContext gl_handle();
+	  void update();
+	  void draw();
+	  void clear();
+
+	  void drawPoint(int x, int y, int color);
 
           ~Renderer();
 
      private:
+	  int w, h;
           SDL_Renderer* renderer;
-	  SDL_GLContext context;
+	  Uint32* pixels;
+          sdl::Texture texture;
      };
 }
 

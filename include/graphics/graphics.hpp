@@ -3,29 +3,26 @@
 
 #include "initError.hpp"
 #include "window.hpp"
-#include "renderer.hpp"
-#include "texture.hpp"
 
 namespace gfx
 {
+     template <class T>
      class Graphics
      {
      public:
           Graphics(sdl::Window&,
-                   int w, int h,
-                   Uint32 flags =
-                     SDL_RENDERER_ACCELERATED |
-		   SDL_RENDERER_PRESENTVSYNC) noexcept(false);
+                   int w, int h) noexcept(false);
 
           void update();
           void draw();
           void clear();
 
+	  // TODO: Build a better drawing API.
           inline void drawPoint(int x, int y, int color)
           {
                if(x > 0 && x < w-1 &&
                   y > 0 && y < h-1) {
-                    pixels[y * w + x] = color;
+                    renderer.drawPoint(x, y, color);
                }
           }
 
@@ -34,17 +31,14 @@ namespace gfx
           void drawLine(int x1, int y1,
                         int x2, int y2);
 
-          ~Graphics();
-
      private:
           int w;
           int h;
 
-          Uint32* pixels;
-
-          sdl::Renderer renderer;
-          sdl::Texture texture;
+          T renderer;
      };
 }
+
+#include "graphics.hxx"
 
 #endif

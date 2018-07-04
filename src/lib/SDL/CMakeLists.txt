@@ -5,6 +5,7 @@ add_subdirectory(InitVideo)
 add_subdirectory(Display)
 add_subdirectory(Window)
 add_subdirectory(Renderer)
+add_subdirectory(GLRenderer)
 add_subdirectory(Texture)
 
 set(SDLUtil_SRCS

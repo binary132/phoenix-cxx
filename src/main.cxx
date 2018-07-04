@@ -1,10 +1,13 @@
 #include "app.hpp"
+#include "renderer.hpp"
+#include "glRenderer.hpp"
 
 int main(int argc, char* argv[])
 {
-	app::App a;
+     app::App<sdl::Renderer> a;
+     // app::App<sdl::GLRenderer> a;
 
-	a.run();
+     a.run();
 
-	return 0;
+     return 0;
 }

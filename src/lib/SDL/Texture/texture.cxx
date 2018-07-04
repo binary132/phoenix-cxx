@@ -22,7 +22,7 @@ Texture::Texture(SDL_Renderer* renderer,
 }
 
 void Texture::update(const SDL_Rect* rect,
-                     const void*     pixels,
+                     const Uint32*   pixels,
                      int             pitch) noexcept(false)
 {
      if (int v = SDL_UpdateTexture(texture, rect, pixels, pitch) != 0) {

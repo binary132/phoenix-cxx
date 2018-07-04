@@ -10,6 +10,8 @@ add_executable(${APPLICATION_NAME} ${GUI_TYPE} ${main_SRCS})
 
 target_link_libraries(${APPLICATION_NAME}
   App
+  SDLRenderer
+  SDLGLRenderer
   Error
 )
 
