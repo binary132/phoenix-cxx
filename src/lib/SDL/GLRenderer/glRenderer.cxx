@@ -19,11 +19,15 @@ GLRenderer::GLRenderer(SDL_Window* win, int w, int h) noexcept(false)
      }
 
      int gladInitOk = gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress);
-     if (gladInitOk) {
+     if (!gladInitOk) {
 	   std::stringstream ss;
 	   ss << "gladLoadGLLoader failed: " << gladInitOk;
 	   throw error::InitError(ss);
      }
+
+     printf("Vendor:   %s\n", glGetString(GL_VENDOR));
+     printf("Renderer: %s\n", glGetString(GL_RENDERER));
+     printf("Version:  %s\n", glGetString(GL_VERSION));
 }
 
 void GLRenderer::update() { }
